@@ -1,11 +1,18 @@
 const tests = require('./../helpers/connection/tests');
 const Tests = tests.Tests;
 
+const responses = require('./../helpers/connection/response');
+const Responses = responses.Response;
+
+const today = new Date()
+
 module.exports = {
     register,
     getTests,
     upTest,
-    mdTest
+    mdTest,
+    getNumUnresponseDay,
+    getNumTestEgde
 }
 
 async function register(colletion) {
@@ -48,4 +55,41 @@ async function mdTest(test_id, collection) {
   } catch (e) {
     throw e.message
   }
+}
+
+async function getNumUnresponseDay(user_id) {
+  let total = await Responses.find(
+    { 
+      idUser: user_id,
+      createDate: {
+        $gte: today,
+        $lt: today
+      }
+    })
+  return {
+    totalTestToday: 4 - total.length
+  }
+}
+
+async function getNumTestEgde(user_id) {
+  let tests = await Tests.find().select('-hash');
+  let arr_results = []
+
+  if (tests)
+    for (const item of tests)
+      arr_results.push({
+        "idTest": item._id,
+        // "countTotalTest": await Responses.countDocuments({
+        //   idUser: user_id,
+        //   idTest: item._id
+        // }),
+        "countTotalYear": await Responses.countDocuments({
+          idUser: user_id,
+          idTest: item._id,
+          createDate: {
+            $gte: today.getFullYear()
+          }
+        })
+      })
+    return arr_results
 }

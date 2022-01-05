@@ -23,16 +23,13 @@ const schema = new Schema({
       type: Date
     },
     remarkResponse: { 
-      type: Number,
-      required: true
+      type: Number
     },
     normResponse: { 
-      type: Number,
-      required: true
+      type: Number
     },
     percentilResponse: { 
-      type: Number,
-      required: true
+      type: Number
     },
     amountResponse: { 
       type: Number
