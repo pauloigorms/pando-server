@@ -26,6 +26,17 @@ const schema = new Schema({
       type: Number,
       required: true
     },
+    normResponse: { 
+      type: Number,
+      required: true
+    },
+    percentilResponse: { 
+      type: Number,
+      required: true
+    },
+    amountResponse: { 
+      type: Number
+    },
     questions: [
       {
         idQuestion: {

@@ -17,23 +17,23 @@ const schema = new Schema({
     },
     alertMessage: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
     },
     descriptionMessage: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
     },
     descriptionTest: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
     },
     shortName: {
       type: String,
-      trim: true,
-      required: true
+      trim: true
+    },
+    aliasName: {
+      type: String,
+      trim: true
     },
     questions: [
       {
