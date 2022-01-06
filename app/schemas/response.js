@@ -16,8 +16,7 @@ const schema = new Schema({
       required: true
     },
     startDate: {
-      type: Date,
-      required: true
+      type: Date
     },
     endDate: {
       type: Date
