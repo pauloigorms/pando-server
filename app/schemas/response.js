@@ -22,16 +22,16 @@ const schema = new Schema({
       type: Date
     },
     remarkResponse: { 
-      type: Number
+      type: [Number]
     },
     normResponse: { 
-      type: Number
+      type: [Number]
     },
-    percentilResponse: { 
-      type: Number
+    percentilResponse: {
+      type: [Number]
     },
-    amountResponse: { 
-      type: Number
+    levelResponse: { 
+      type: [String]
     },
     questions: [
       {

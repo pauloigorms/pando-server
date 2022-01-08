@@ -67,7 +67,7 @@ async function getNumUnresponseDay(user_id) {
       }
     })
   return {
-    totalTestToday: 4 - total.length
+    totalTestToday: total.length
   }
 }
 

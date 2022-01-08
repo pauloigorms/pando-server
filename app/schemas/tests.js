@@ -23,6 +23,9 @@ const schema = new Schema({
       type: String,
       trim: true
     },
+    referenceTest: {
+      type: [String]
+    },
     descriptionTest: {
       type: String,
       trim: true
