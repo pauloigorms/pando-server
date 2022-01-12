@@ -10,6 +10,7 @@ router.put('/:id', mdTest)
 
 router.get('/charts/1/:id', getNumUnresponseDay)
 router.get('/charts/2/:id', getNumTestEgde)
+router.get('/charts/3/:id', getData4Chart)
 
 module.exports = router
 
@@ -50,6 +51,13 @@ function getNumUnresponseDay(req, res, next) {
 
 function getNumTestEgde(req, res, next) {
     tests.getNumTestEgde(req.params.id)
+        .then((chartsInfo) => res.status(200).send(
+            { chartsInfo }))
+        .catch(error => { throw error })
+}
+
+function getData4Chart(req, res, next) {
+    tests.getData4Chart(req.params.id, req.query)
         .then((chartsInfo) => res.status(200).send(
             { chartsInfo }))
         .catch(error => { throw error })

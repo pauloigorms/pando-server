@@ -60,6 +60,12 @@ const schema = new Schema({
     occupation: {
       type: String,
     },
+    company: {
+      type: String,
+    },
+    sector: {
+      type: String,
+    },
     phone: {
       type: String
     }

@@ -12,7 +12,8 @@ module.exports = {
     upTest,
     mdTest,
     getNumUnresponseDay,
-    getNumTestEgde
+    getNumTestEgde,
+    getData4Chart
 }
 
 async function register(colletion) {
@@ -92,4 +93,8 @@ async function getNumTestEgde(user_id) {
         })
       })
     return arr_results
+}
+
+function getData4Chart(id, paramns) {
+  console.log(id, paramns)
 }
