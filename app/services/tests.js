@@ -95,6 +95,35 @@ async function getNumTestEgde(user_id) {
     return arr_results
 }
 
-function getData4Chart(id, paramns) {
-  console.log(id, paramns)
+async function getData4Chart(user_id, paramns) {
+
+  try {
+
+    let hoje = new Date()
+    let responses = await Responses.find(
+      { 
+        idUser: user_id,
+        createDate: {
+          $gte: paramns.startDate != '' ? paramns.startDate : new Date(hoje.setDate(hoje.getDate() - 90)),
+          $lt: paramns.endDate != '' ? paramns.endDate : today
+        }
+      })
+
+    return responses.reduce((groups, item) => {
+      let group = (groups[item.createDate] || []);
+      group.push(item);
+      groups[item.createDate.toLocaleString("pt-Br")] = {
+        remarkResponse: group[0].remarkResponse,
+        normResponse: group[0].normResponse,
+        percentilResponse: group[0].percentilResponse,
+        levelResponse: group[0].levelResponse,
+        idTest: group[0].idTest
+      };
+      return groups;
+    }, {});
+
+  } catch (error) {
+    return error
+  }
+
 }
