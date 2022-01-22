@@ -43,7 +43,7 @@ const schema = new Schema({
       required: true
     },
     acceptTerms: {
-      type: String, 
+      type: Boolean, 
       required: true
     },
     gender: {

@@ -6,6 +6,7 @@ const users = require('../services/users');
 router.post('/signup', registerUser)
 router.post('/signin', authenticate)
 router.patch('/:id', upUser)
+router.get('/:id', getUser)
 module.exports = router
 
 function registerUser(req, res, next) {
@@ -23,11 +24,16 @@ function authenticate(req, res, next) {
         .catch(err => next(err))
 }
 
-function upUser(req, res, next) {
+function upUser(req, res) {
     users.upUser(req.params.id, req.body)
-        .then((user) => res.status(200).send(
-            { response: "Success", status: 200, data: user }))
-        .catch(err => next.status(204).send({
-            responde: err
-        }))
+    .then((test) => res.status(200).send(
+        { response: "Success", status: 200, data: test }))
+    .catch(error => { throw error })
+}
+
+function getUser(req, res) {
+    users.getById(req.params.id)
+        .then((tests) => res.status(200).send(
+            { status: 200, data: tests }))
+        .catch(error => { throw error})
 }

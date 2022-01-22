@@ -59,14 +59,17 @@ async function getById(user__id) {
   return await Users.findById(user__id).select('-hash');
 }
 
-async function upUser(user__id, collection) {
-  const username = await Users.findById(user__id)
+async function upUser(user__id, user__param) {
+  const user = await Users.findById(user__id).select('-hash');
   try {
-    if (!username) {
-      throw 'Teste não encontrado!'
+    if (!user) {
+      throw 'Usuário não encontrado!'
     } else {
-      Object.assign(username, collection);
-      return await username.save();
+      if (user__param.password != null) {
+        user__param.password = bcrypt.hashSync(user__param.password, 10);
+      }
+      Object.assign(user, user__param);
+      await user.save();
     }
   } catch (e) {
     throw e.message
