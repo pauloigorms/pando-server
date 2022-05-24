@@ -7,7 +7,8 @@ module.exports = {
   register,
   authenticate,
   getById,
-  upUser
+  upUser,
+  upPassWord
 }
 
 async function register(user__param) {
@@ -59,8 +60,17 @@ async function getById(user__id) {
   return await Users.findById(user__id).select('-hash');
 }
 
+async function upPassWord(user_params) {
+  try {
+    if (user_params.password) await Users.updateOne({ $or: [{ email: user_params.email }, { username: user_params.username }]}, { $set: {"password": bcrypt.hashSync(user_params.password, 10)}} )
+    else throw 'Usuário não encontrado!'
+  } catch (e) {
+    throw e.message
+  }
+}
+
 async function upUser(user__id, user__param) {
-  const user = await Users.findById(user__id).select('-hash');
+  const user = await Users.findById(user__id).select('-hash')
   try {
     if (!user) {
       throw 'Usuário não encontrado!'

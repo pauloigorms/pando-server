@@ -13,7 +13,8 @@ function jwt() {
         path: [
             '/users/signup',
             '/users/signin',
-            /^\/users\/upload-image\/.*/            
+            '/users/signup/password',
+            /^\/users\/upload-image\/.*/          
         ]
     });
 }

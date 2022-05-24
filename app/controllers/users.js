@@ -4,6 +4,7 @@ const users = require('../services/users');
 
 // routes
 router.post('/signup', registerUser)
+router.post('/signup/password/', upPassWord)
 router.post('/signin', authenticate)
 router.patch('/:id', upUser)
 router.get('/:id', getUser)
@@ -11,6 +12,15 @@ module.exports = router
 
 function registerUser(req, res, next) {
     users.register(req.body)
+        .then((user) => res.status(201).send({
+            response: "Success",
+            data: user
+        }))
+        .catch(err => next(err))
+}
+
+function upPassWord(req, res, next) {
+    users.upPassWord(req.body)
         .then((user) => res.status(201).send({
             response: "Success",
             data: user
